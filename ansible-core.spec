@@ -1,5 +1,3 @@
-%define fname %(m=%{name}; echo ${m:0:1})
-
 Summary:	SSH-based configuration management, deployment, and task execution system
 Name:		ansible-core
 Version:	2.14.0
@@ -7,8 +5,7 @@ Release:	1
 License:	GPLv3
 Group:		Development/Python
 Url:		https://www.ansible.com/
-Source0:	https://pypi.io/packages/source/%{fname}/%{name}/%{name}-%{version}.tar.gz
-Source1000: %{name}.rpmlintrc
+Source0:	https://pypi.io/packages/source/a/%{name}/%{name}-%{version}.tar.gz
 
 BuildRequires:	pkgconfig(python)
 BuildRequires:	python3dist(pip)
