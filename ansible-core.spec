@@ -1,7 +1,7 @@
 Summary:	SSH-based configuration management, deployment, and task execution system
 Name:		ansible-core
 Version:	2.14.0
-Release:	1
+Release:	2
 License:	GPLv3
 Group:		Development/Python
 Url:		https://www.ansible.com/
