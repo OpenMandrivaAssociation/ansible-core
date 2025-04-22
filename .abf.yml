@@ -1,3 +1,2 @@
 sources:
-  ansible-core-2.14.0.tar.gz:  f4752207b80e1792213486057d01ba28c43d2cfb
-
+  ansible_core-2.18.5.tar.gz: f5c6b493f41976f6f0ddd1d00137de6521be5f32

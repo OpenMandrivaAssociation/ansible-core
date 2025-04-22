@@ -1,32 +1,32 @@
 Summary:	SSH-based configuration management, deployment, and task execution system
 Name:		ansible-core
-Version:	2.14.0
-Release:	2
+Version:	2.18.5
+Release:	1
 License:	GPLv3
 Group:		Development/Python
 Url:		https://www.ansible.com/
-Source0:	https://pypi.io/packages/source/a/%{name}/%{name}-%{version}.tar.gz
+Source0:	https://pypi.io/packages/source/a/%{name}/ansible_core-%{version}.tar.gz
 
 BuildRequires:	pkgconfig(python)
-BuildRequires:	python3dist(pip)
-BuildRequires:	python3dist(setuptools)
-BuildRequires:	python3dist(wheel)
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(wheel)
 # tests
-#BuildRequires:	python3dist(botocore)
-BuildRequires:	python3dist(jinja2)
-BuildRequires:	python3dist(pyyaml)
-BuildRequires:	python3dist(cryptography)
-#BuildRequires:	python3dist(curses)
-BuildRequires:	python3dist(packaging)
-BuildRequires:	python3dist(pytest)
-BuildRequires:	python3dist(pytz)
-#BuildRequires:	python3dist(resolvelib) < 0.9.0
+#BuildRequires:	python%{pyver}dist(botocore)
+BuildRequires:	python%{pyver}dist(jinja2)
+BuildRequires:	python%{pyver}dist(pyyaml)
+BuildRequires:	python%{pyver}dist(cryptography)
+#BuildRequires:	python%{pyver}dist(curses)
+BuildRequires:	python%{pyver}dist(packaging)
+BuildRequires:	python%{pyver}dist(pytest)
+BuildRequires:	python%{pyver}dist(pytz)
+#BuildRequires:	python%{pyver}dist(resolvelib) < 0.9.0
 
-Requires:	python3dist(jinja2)
-Requires:	python3dist(pyyaml)
-Requires:	python3dist(cryptography)
-Requires:	python3dist(packaging)
-#Requires:	python3dist(resolvelib)
+Requires:	python%{pyver}dist(jinja2)
+Requires:	python%{pyver}dist(pyyaml)
+Requires:	python%{pyver}dist(cryptography)
+Requires:	python%{pyver}dist(packaging)
+#Requires:	python%{pyver}dist(resolvelib)
 
 BuildArch:	noarch
 
@@ -50,18 +50,25 @@ Design Principles:
 
 %files
 %license COPYING
-%doc README.rst PKG-INFO porting_guide_?.rst CHANGELOG-v?.rst
-%{_bindir}/ansible-community
+%{_bindir}/ansible
+%{_bindir}/ansible-config
+%{_bindir}/ansible-console
+%{_bindir}/ansible-doc
+%{_bindir}/ansible-galaxy
+%{_bindir}/ansible-inventory
+%{_bindir}/ansible-playbook
+%{_bindir}/ansible-pull
+%{_bindir}/ansible-test
+%{_bindir}/ansible-vault
 %config(noreplace) %{_sysconfdir}/ansible
-%{py_sitedir}/ansible_collections
-%{py_sitedir}/ansible-%{uversion}-py%{python3_version}.egg-info
-%doc %{_mandir}/man1/ansible*
-%doc examples/playbooks
+%{py_sitedir}/ansible
+%{py_sitedir}/ansible_test
+%{py_sitedir}/ansible_core-%{version}*-info
 
 #--------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n ansible_core-%{version}
 
 %build
 %py_build
@@ -70,12 +77,8 @@ Design Principles:
 %py_install
 
 mkdir -p %{buildroot}%{_sysconfdir}/ansible/
-cp examples/hosts %{buildroot}%{_sysconfdir}/ansible/
-cp examples/ansible.cfg %{buildroot}%{_sysconfdir}/ansible/
 mkdir -p %{buildroot}/%{_mandir}/man1/
-cp -v docs/man/man1/*.1 %{buildroot}/%{_mandir}/man1/
 mkdir -p %{buildroot}/%{_datadir}/ansible
-cp -va library/* %{buildroot}/%{_datadir}/ansible/
 
 #mkdir -p $RPM_BUILD_ROOT/%{_mandir}/{man1,man3}/
 #cp -va library/* $RPM_BUILD_ROOT/%{_datadir}/ansible/
